@@ -2,7 +2,7 @@
 /asset/test*
 
 # Ignore environment folder
-.env/
+/.env/
 /asset/models
 /asset/data
 /asset/catboost_info
