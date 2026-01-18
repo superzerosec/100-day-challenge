@@ -1,5 +1,8 @@
-# Ignore environment files
-.env
+# Ignore environment file
 /asset/test*
-/asset/models/*
-/asset/data/*
+
+# Ignore environment folder
+.env/
+/asset/models
+/asset/data
+/asset/catboost_info/*
