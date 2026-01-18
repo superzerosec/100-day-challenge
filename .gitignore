@@ -2,3 +2,4 @@
 .env
 /asset/test*
 /asset/models/*
+/asset/data/*
