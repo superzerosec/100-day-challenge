@@ -5,4 +5,4 @@
 .env/
 /asset/models
 /asset/data
-/asset/catboost_info/*
+/asset/catboost_info
