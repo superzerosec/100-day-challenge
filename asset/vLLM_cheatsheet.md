@@ -5,6 +5,9 @@ uv add pip
 uv run python -m pip install vllm
 ```
 # Usage
+Run the model in the terminal window in this sequence:
+1. Serve a model
+2. Chat with the model
 ## Serve a model
 ```bash
 uv run vllm serve Qwen/Qwen3-1.7B
@@ -24,10 +27,8 @@ export CUDA_DEVICE_ORDER=PCI_BUS_ID
 export CUDA_VISIBLE_DEVICES=0,1
 uv run vllm serve Qwen/Qwen3-1.7B --gpu-memory-utilization 0.70 --max-model-len 8192
 ```
-Set the GPU device order and chat with the model
+Then chat with the model
 ```bash
-export CUDA_DEVICE_ORDER=PCI_BUS_ID
-export CUDA_VISIBLE_DEVICES=0,1
 uv run vllm chat --model Qwen/Qwen3-1.7B
 ```
 ## To Test the Model
