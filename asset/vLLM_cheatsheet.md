@@ -5,13 +5,13 @@ uv add pip
 uv run python -m pip install vllm
 ```
 # Usage
-## Chat
-```bash
-uv run vllm chat --model Qwen/Qwen3-1.7B
-```
 ## Serve a model
 ```bash
 uv run vllm serve Qwen/Qwen3-1.7B
+```
+## Chat
+```bash
+uv run vllm chat --model Qwen/Qwen3-1.7B
 ```
 ## Serve with specific GPU
 Checking the GPU device order
