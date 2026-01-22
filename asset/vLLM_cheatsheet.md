@@ -8,7 +8,7 @@ uv run python -m pip install vllm
 Run the model in the terminal window in this sequence:
 1. Serve a model
 2. Chat with the model
-## Serve a model
+## Serve a Model
 ```bash
 uv run vllm serve Qwen/Qwen3-1.7B
 ```
@@ -16,7 +16,7 @@ uv run vllm serve Qwen/Qwen3-1.7B
 ```bash
 uv run vllm chat --model Qwen/Qwen3-1.7B
 ```
-## Serve on Specific GPU
+## Serve Model on Specific GPU
 Checking the GPU device order
 ```bash
 nvidia-smi -L
@@ -33,7 +33,7 @@ export CUDA_DEVICE_ORDER=PCI_BUS_ID
 export CUDA_VISIBLE_DEVICES=0,1
 uv run vllm chat --model Qwen/Qwen3-1.7B
 ```
-## To Test the Model
+## Test Chat with the Model
 ```bash
 curl -s http://127.0.0.1:8000/v1/chat/completions \
   -H "Content-Type: application/json" \
@@ -79,7 +79,7 @@ export CUDA_DEVICE_ORDER=PCI_BUS_ID
 export CUDA_VISIBLE_DEVICES=1
 uv run vllm serve Qwen/Qwen3-1.7B --gpu-memory-utilization 0.70 --port 9002
 ```
-Then chat with the models on specific urls.  
+Then chat with the models on specific URLs.  
 Start chat with meta-llama/Llama-3.2-1B-Instruct on port 9001 and using GPU 0.
 ```bash
 export CUDA_DEVICE_ORDER=PCI_BUS_ID
