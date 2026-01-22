@@ -66,7 +66,7 @@ curl -s http://127.0.0.1:8000/v1/chat/completions \
 # Advanced Usage
 ## Serve Multiple Models
 Each model should be served on a different port.  
-For example, to serve Qwen/Qwen3-1.7B on port 9001 and Qwen/Qwen3-7B on port 9002.  
+For example, to serve meta-llama/Llama-3.2-1B-Instruct on port 9001 and Qwen/Qwen3-7B on port 9002.  
 Serve meta-llama/Llama-3.2-1B-Instruct on port 9001 and using GPU 0.  
 ```bash
 export CUDA_DEVICE_ORDER=PCI_BUS_ID
