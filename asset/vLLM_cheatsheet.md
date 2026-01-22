@@ -16,7 +16,7 @@ uv run vllm serve Qwen/Qwen3-1.7B
 ```bash
 uv run vllm chat --model Qwen/Qwen3-1.7B
 ```
-## Serve with specific GPU
+## Serve on Specific GPU
 Checking the GPU device order
 ```bash
 nvidia-smi -L
