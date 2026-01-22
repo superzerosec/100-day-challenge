@@ -29,6 +29,8 @@ uv run vllm serve Qwen/Qwen3-1.7B --gpu-memory-utilization 0.70 --max-model-len 
 ```
 Then chat with the model
 ```bash
+export CUDA_DEVICE_ORDER=PCI_BUS_ID
+export CUDA_VISIBLE_DEVICES=0,1
 uv run vllm chat --model Qwen/Qwen3-1.7B
 ```
 ## To Test the Model
@@ -60,6 +62,35 @@ curl -s http://127.0.0.1:8000/v1/chat/completions \
     "temperature": 0.7,
     "max_tokens": 256
   }' | jq -r '.choices[].message.content'
+```
+# Advanced Usage
+## Serve Multiple Models
+Each model should be served on a different port.  
+For example, to serve Qwen/Qwen3-1.7B on port 9001 and Qwen/Qwen3-7B on port 9002.  
+Serve meta-llama/Llama-3.2-1B-Instruct on port 9001 and using GPU 0.  
+```bash
+export CUDA_DEVICE_ORDER=PCI_BUS_ID
+export CUDA_VISIBLE_DEVICES=0
+uv run vllm serve meta-llama/Llama-3.2-1B-Instruct --gpu-memory-utilization 0.70 --port 9001
+```
+Serve Qwen/Qwen3-1.7B on port 9002 and using GPU 1.
+```bash
+export CUDA_DEVICE_ORDER=PCI_BUS_ID
+export CUDA_VISIBLE_DEVICES=1
+uv run vllm serve Qwen/Qwen3-1.7B --gpu-memory-utilization 0.70 --port 9002
+```
+Then chat with the models on specific urls.  
+Start chat with meta-llama/Llama-3.2-1B-Instruct on port 9001 and using GPU 0.
+```bash
+export CUDA_DEVICE_ORDER=PCI_BUS_ID
+export CUDA_VISIBLE_DEVICES=0
+uv run vllm chat --model meta-llama/Llama-3.2-1B-Instruct --url http://localhost:9001/v1
+```
+Start chat with Qwen/Qwen3-1.7B on port 9002 and using GPU 1.
+```bash
+export CUDA_DEVICE_ORDER=PCI_BUS_ID
+export CUDA_VISIBLE_DEVICES=1
+uv run vllm chat --model Qwen/Qwen3-1.7B --url http://localhost:9002/v1
 ```
 # Reference
 [vLLM](https://github.com/vllm-project/vllm)  
