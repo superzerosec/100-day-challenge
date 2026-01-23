@@ -93,18 +93,19 @@ export CUDA_VISIBLE_DEVICES=1
 uv run vllm chat --model Qwen/Qwen3-1.7B --url http://localhost:9002/v1
 ```
 ## Data Parallel Deployment
-vLLM supports Data Parallel deployment, where model weights are replicated across separate instances/GPUs to process independent batches of requests.  
-This will work with both dense and MoE models.  
+vLLM supports Data Parallel deployment, where model weights are replicated across separate instances/GPUs to process independent batches of requests. This will work with both dense and MoE models.  
+
 For MoE models, particularly those like DeepSeek that employ MLA (Multi-head Latent Attention), it can be advantageous to use data parallel for the attention layers and expert or tensor parallel (EP or TP) for the expert layers.  
+
 This will run DP=2, TP=2 on a single 4-GPU node:
 ```bash
 uv run vllm serve Qwen/Qwen3-1.7B --gpu-memory-utilization 0.70 --max-model-len 8192 --data-parallel-size 2 --tensor-parallel-size 2
 ```
 Start chat with the model
 ```bash
-uv run vllm chat --model Qwen/Qwen3-1.7B
+uv run vllm chat --model Qwen/Qwen3-1.7B --quick "Which one is bigger, 9.11 or 9.9? think carefully."
 ```
 # Reference
 [vLLM](https://github.com/vllm-project/vllm)  
-[vLLM Documentation](https://docs.vllm.ai/en/latest/)
+[vLLM Documentation](https://docs.vllm.ai/en/latest/)  
 [Data Parallel Deployment](https://github.com/vllm-project/vllm/blob/main/docs/serving/data_parallel_deployment.md)
