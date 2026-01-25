@@ -9,7 +9,7 @@ Deep Hat is trained on real-world attack patterns, operator-inspired tasks, and 
 ```bash
 export CUDA_DEVICE_ORDER=PCI_BUS_ID
 export CUDA_VISIBLE_DEVICES=0,1
-uv run vllm serve DeepHat/DeepHat-V1-7B --gpu-memory-utilization 0.70 --max-model-len 8192
+uv run vllm serve DeepHat/DeepHat-V1-7B --cpu-offload-gb 20 --max-model-len 8192
 ```
 
 ```bash
