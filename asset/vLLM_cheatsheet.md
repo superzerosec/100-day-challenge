@@ -115,44 +115,32 @@ Start chat with the model.
 ```bash
 uv run vllm chat --model Qwen/Qwen3-1.7B --quick "Which one is bigger, 9.11 or 9.9? think carefully."
 ```
-## Inference with vLLM
-Inference with vLLM in a Python script `inference_with_vllm.py`.
+## Inference using vLLM
+Serve the model.
+```bash
+export CUDA_DEVICE_ORDER=PCI_BUS_ID
+export CUDA_VISIBLE_DEVICES=0,1
+uv run vllm serve Qwen/Qwen3-1.7B --gpu-memory-utilization 0.70 --max-model-len 8192 --attention-backend FLASHINFER --dtype auto --api-key token-abc123
+```
+Inference using vLLM in a Python script `vLLM_Inference.py`.
 ```python
-import os
-import torch
-from vllm import LLM, SamplingParams
+from openai import OpenAI
 
-def main() -> None:
-    # Configure multi-GPU: use tensor parallelism to split model across GPUs
-    num_gpus = torch.cuda.device_count() or 1
-    os.environ.setdefault("CUDA_DEVICE_ORDER", "PCI_BUS_ID")
-
-    prompts = [
-        "Hello, my name is",
-        "The president of the United States is",
-        "The capital of France is",
-        "The future of AI is",
-        "Which one is bigger, 9.11 or 9.9? think carefully."
-    ]
-    sampling_params = SamplingParams(temperature=0.8, top_p=0.95)
-
-    llm = LLM(
-        model="Qwen/Qwen3-1.7B",
-        tensor_parallel_size=min(num_gpus, 2),
-        data_parallel_size=1,
-        gpu_memory_utilization=0.70,
-        max_model_len=8192,
+def main():
+    client = OpenAI(
+        base_url="http://localhost:8000/v1",
+        api_key="token-abc123",
     )
 
-    # Use chat-style API: each prompt becomes a single-user-message conversation
-    conversations = [
-        [{"role": "You are a helpful assistant.", "content": prompt}]
-        for prompt in prompts
-    ]
+    completion = client.chat.completions.create(
+        model="Qwen/Qwen3-1.7B",
+        messages = [
+            {"role": "system", "content": "You are Llama, an AI assistant created by Meta."},
+            {"role": "user", "content": [{"type": "text", "text": "which one is bigger, 9.11 or 9.9? think carefully."}]},
+        ],
+    )
 
-    outputs = llm.chat(messages=conversations, sampling_params=sampling_params, use_tqdm=False)
-    for prompt, output in zip(prompts, outputs):
-        print(f"Prompt: {prompt!r}, Generated text: {output.outputs[0].text!r}")
+    print(completion.choices[0].message.content)
 
 
 if __name__ == "__main__":
@@ -160,9 +148,42 @@ if __name__ == "__main__":
 ```
 Run the script.
 ```bash
-uv run python inference_with_vllm.py
+uv run python vLLM_Inference.py
 ```
+## CPU Offloading
+The following commands demonstrate how to run a large language model (DeepHat/DeepHat-V1-7B) on a machine that may have limited GPU memory by offloading part of the model to the CPU. The `--cpu-offload-gb 20` option specifies that up to 20GB of system RAM will be used for model weights that cannot fit into GPU memory, and `--max-model-len 8192` sets the maximum sequence length for your inputs and outputs.  
+Start the vLLM server with CPU offloading.
+```bash
+uv run vllm serve DeepHat/DeepHat-V1-7B --max-model-len 8192 --cpu-offload-gb 20 
+```
+Once the server is up, you can quickly interact with the model using the `vllm chat` interface. The example below asks the model for instructions on checking for malware detections within Elastic Security.
+```bash
+uv run vllm chat --model DeepHat/DeepHat-V1-7B --quick "How to check malware detection in Elastic Security?"
+```
+## Quantization
+This section demonstrates how to run a quantized version of the Qwen3-1.7B model with vLLM, specifically using FP8 quantization for faster and more memory-efficient inference on supported hardware. It includes both serving and interactive chat commands.  
+Serve the FP8 Quantized Model.  
+First, set the environment variables to specify which GPUs to use, then launch the vLLM server with FP8 quantization enabled:
+```bash
+export CUDA_DEVICE_ORDER=PCI_BUS_ID
+export CUDA_VISIBLE_DEVICES=0,1
+uv run vllm serve Qwen/Qwen3-1.7B \
+    --gpu-memory-utilization 0.70 \
+    --max-model-len 8192 \
+    --attention-backend FLASHINFER \
+    --quantization fp8
+```
+- `--quantization fp8` tells vLLM to load the model weights in FP8 format, greatly decreasing memory requirements and potentially increasing inference speed, depending on your hardware.
+- Adjust `--gpu-memory-utilization` and `--max-model-len` as needed for your workload and GPU size.
+
+Chat with the Quantized Model.  
+Once the server is running, you can send a prompt to the model using the `vllm chat` tool.
+```bash
+uv run vllm chat --model Qwen/Qwen3-1.7B --quick "Which one is bigger, 9.11 or 9.9? think carefully."
+```
+This command quickly sends the prompt to your running quantized model and outputs the response.
 # Reference
 [vLLM](https://github.com/vllm-project/vllm)  
 [vLLM Documentation](https://docs.vllm.ai/en/latest/)  
-[Data Parallel Deployment](https://github.com/vllm-project/vllm/blob/main/docs/serving/data_parallel_deployment.md)
+[Data Parallel Deployment](https://github.com/vllm-project/vllm/blob/main/docs/serving/data_parallel_deployment.md)  
+[Quantization](https://docs.vllm.ai/en/latest/features/quantization/)  
