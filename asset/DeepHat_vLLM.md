@@ -12,6 +12,8 @@ To serve the DeepHat model using vLLM, you will first need to have the DeepHat m
 You can start a vLLM server using the `uv` runner and the `vllm serve` command. Replace `DeepHat/DeepHat-V1-7B` with the correct model path if needed, and adjust the parameters to fit your hardware (such as offload, GPU, or CPU settings):
 
 ```bash
+export CUDA_DEVICE_ORDER=PCI_BUS_ID
+export CUDA_VISIBLE_DEVICES=1
 uv run vllm serve DeepHat/DeepHat-V1-7B --cpu-offload-gb 20 --max-model-len 8192
 ```
 - `--cpu-offload-gb 20` allows a portion of the model to reside in system RAM, making it possible to serve larger models on GPU or even with limited GPU resources.

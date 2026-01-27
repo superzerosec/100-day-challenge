@@ -154,6 +154,8 @@ uv run python vLLM_Inference.py
 The following commands demonstrate how to run a large language model (DeepHat/DeepHat-V1-7B) on a machine that may have limited GPU memory by offloading part of the model to the CPU. The `--cpu-offload-gb 20` option specifies that up to 20GB of system RAM will be used for model weights that cannot fit into GPU memory, and `--max-model-len 8192` sets the maximum sequence length for your inputs and outputs.  
 Start the vLLM server with CPU offloading.
 ```bash
+export CUDA_DEVICE_ORDER=PCI_BUS_ID
+export CUDA_VISIBLE_DEVICES=1
 uv run vllm serve DeepHat/DeepHat-V1-7B --max-model-len 8192 --cpu-offload-gb 20 
 ```
 Once the server is up, you can quickly interact with the model using the `vllm chat` interface. The example below asks the model for instructions on checking for malware detections within Elastic Security.
