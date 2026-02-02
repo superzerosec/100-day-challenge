@@ -57,7 +57,7 @@ curl -s http://127.0.0.1:8000/v1/chat/completions \
 
 Test chat with the model in the terminal window.
 ```bash
- curl -s http://127.0.0.1:8000/v1/chat/completions \
+curl -s http://127.0.0.1:8000/v1/chat/completions \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer dev" \
   -d '{
@@ -114,6 +114,10 @@ uv run vllm serve Qwen/Qwen3-1.7B --gpu-memory-utilization 0.70 --max-model-len 
 Start chat with the model.
 ```bash
 uv run vllm chat --model Qwen/Qwen3-1.7B --quick "Which one is bigger, 9.11 or 9.9? think carefully."
+```
+This will run DP=8, TP=1 on a single 8-GPU node.
+```bash
+uv run vllm serve moonshotai/Kimi-K2-Thinking --gpu-memory-utilization 0.70 --max-model-len 8192 --trust-remote-code --data-parallel-size 8 --tensor-parallel-size 1
 ```
 ## Inference using vLLM
 Serve the model.

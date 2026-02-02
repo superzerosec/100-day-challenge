@@ -1,21 +1,20 @@
-from openai import OpenAI
+from vllm import LLM, SamplingParams
 
 def main():
-    client = OpenAI(
-        base_url="http://localhost:8000/v1",
-        api_key="token-abc123",
-    )
+    # Initialize the vLLM model
+    llm = LLM(model="Qwen/Qwen3-1.7B")
 
-    completion = client.chat.completions.create(
-        model="Qwen/Qwen3-1.7B",
-        messages = [
-            {"role": "system", "content": "You are Llama, an AI assistant created by Meta."},
-            {"role": "user", "content": [{"type": "text", "text": "which one is bigger, 9.11 or 9.9? think carefully."}]},
-        ],
-    )
+    # Prepare the prompt (simulate a chat format)
+    system_message = "You are Llama, an AI assistant created by Meta."
+    user_message = "which one is bigger, 9.11 or 9.9? think carefully."
+    prompt = f"{system_message}\nUser: {user_message}\nAssistant:"
 
-    print(completion.choices[0].message.content)
+    # Set sampling parameters similar to the original (if desired)
+    sampling_params = SamplingParams(temperature=0.7, max_tokens=256)
 
+    # Generate output using vLLM
+    outputs = llm.generate([prompt], sampling_params)
+    print(outputs[0].outputs[0].text)
 
 if __name__ == "__main__":
     main()
