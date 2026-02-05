@@ -1,4 +1,4 @@
-# OpenCode
+# OpenCode Cheatsheet
 OpenCode is an open source AI coding agent. It’s available as a terminal-based interface, desktop app, or IDE extension.
 ## Installation
 OpenCode empowers you to chat with AI about your codebase, automate repetitive coding tasks, and build software faster using advanced AI models. It supports multiple code completion engines and lets you bring your own OpenAI, Gemini, or Ollama model keys.
@@ -38,9 +38,7 @@ Follow these steps:
 
 Now, OpenCode can call Hugging Face inference providers using your token with the correct permissions.
 
-
 ![OpenCode screenshot](./image/image01.png)
-
 
 # Usage
 To get started with OpenCode, simply launch it from your terminal:
