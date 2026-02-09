@@ -15,8 +15,8 @@ uv run python -m pip install transformers
 uv run python -m pip install torch
 ```
 
-# Usage
-Vulnarable code from [Damn Vulnerable C Program (DVC)](https://github.com/hardik05/Damn_Vulnerable_C_Program/tree/master). Add vulnerable code to `asset/HuggingFace_VulnLLM-R-7B.py`.
+# DVCP
+Vulnarable code from [Damn Vulnerable C Program (DVCP)](https://github.com/hardik05/Damn_Vulnerable_C_Program/tree/master). Add vulnerable code to `asset/HuggingFace_VulnLLM-R-7B.py`.
 ```bash
 uv run asset/HuggingFace_VulnLLM-R-7B.py
 ```
@@ -39,4 +39,4 @@ The struct Image has a char array `data[10]`, which can hold up to 10 bytes plus
 ```
 # Reference
 [VulnLLM-R-7B](https://huggingface.co/UCSB-SURFI/VulnLLM-R-7B)  
-[Damn Vulnerable C Program (DVC)](https://github.com/hardik05/Damn_Vulnerable_C_Program/tree/master)
+[Damn Vulnerable C Program (DVCP)](https://github.com/hardik05/Damn_Vulnerable_C_Program/tree/master)
