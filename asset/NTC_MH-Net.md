@@ -32,7 +32,7 @@ wget --spider -r -l inf -nd -np -R "index.html*" -o /dev/stdout http://cicresear
 cat all_urls_tor_nontor.txt | grep -E '.zip|.xz' | sort | uniq >> download_urls_tor_nontor.txt
 while read url; do axel -n 100 $url; done < download_urls_tor_nontor.txt
 unzip Tor.zip -d tor
-tar -xvf NonTor.tar.xz -d nontor
+tar -xvf NonTor.tar.xz -C nontor
 cd ../../
 ```
 # Usage
