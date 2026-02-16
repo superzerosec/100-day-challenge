@@ -6,27 +6,52 @@ git clone https://github.com/ViktorAxelsen/MH-Net.git
 cd MH-Net
 uv init
 uv add pip
-uv add scipy scikit-learn torch torchvision torchaudio dql
+uv add scapy scikit-learn torch torchvision torchaudio dql
+sudo apt install axel
 ```
 # Dataset
 Prepare the dataset for training and testing.
 ## ISCX-VPN
+### Download the Dataset
 [ISCX-VPN](https://www.unb.ca/cic/datasets/vpn.html) is a dataset consists of VPN and non-VPN traffic.
 ```bash
-mkdir -p dataset/iscx/{vpn,nonvpn}
+mkdir -p dataset/iscx/{vpn,nonvpn}/{train_test,train_test_4bit}
+mkdir -p model/{iscx_vpn,iscx_nonvpn,iscx_tor,iscx_nontor}
 cd dataset/iscx/
 wget --spider -r -l inf -nd -np -R "index.html*" -o /dev/stdout http://cicresearch.ca/CICDataset/ISCX-VPN-NonVPN-2016/Dataset/PCAPs/ | grep '^--' | awk '{print $3}' >> all_urls_vpn_nonvpn.txt
 cat all_urls_vpn_nonvpn.txt | grep '.zip' | sort | uniq >> download_urls_vpn_nonvpn.txt
 while read url; do axel -n 100 $url; done < download_urls_vpn_nonvpn.txt
-find . -name "NonVPN-PCAPs-*.zip" -type f -exec unzip {} -d nonvpn \;
+```
+
+### Extract the Dataset
+VPN Dataset.
+```bash
 find . -name "VPN-PCAP*.zip" -type f -exec unzip {} -d vpn \;
+mkdir -p vpn/{Chat,Email,File,P2P,Streaming,VoIP}
+find vpn/ -maxdepth 1 -regextype posix-extended -regex ".*(chat).*" -exec mv {} vpn/Chat \;
+find vpn/ -maxdepth 1 -regextype posix-extended -regex ".*(email).*" -exec mv {} vpn/Email \;
+find vpn/ -maxdepth 1 -regextype posix-extended -regex ".*(ftp|files).*" -exec mv {} vpn/File \;
+find vpn/ -maxdepth 1 -regextype posix-extended -regex ".*(bittorrent).*" -exec mv {} vpn/P2P \;
+find vpn/ -maxdepth 1 -regextype posix-extended -regex ".*(netflix|spotify|vimeo|youtube).*" -exec mv {} vpn/Streaming \;
+find vpn/ -maxdepth 1 -regextype posix-extended -regex ".*(audio|voip).*" -exec mv {} vpn/VoIP \;
+```
+NonVPN Dataset.
+```bash
+find . -name "NonVPN-PCAPs-*.zip" -type f -exec unzip {} -d nonvpn \;
+mkdir -p nonvpn/{Chat,Email,File,Streaming,Video,VoIP}
+find nonvpn/ -maxdepth 1 -regextype posix-extended -regex ".*(chat).*" -exec mv {} nonvpn/Chat \;
+find nonvpn/ -maxdepth 1 -regextype posix-extended -regex ".*(email).*" -exec mv {} nonvpn/Email \;
+find nonvpn/ -maxdepth 1 -regextype posix-extended -regex ".*(ftp|file|scp).*" -exec mv {} nonvpn/File \;
+find nonvpn/ -maxdepth 1 -regextype posix-extended -regex ".*(netflix|spotify|vimeo|youtube).*" -exec mv {} nonvpn/Streaming \;
+find nonvpn/ -maxdepth 1 -regextype posix-extended -regex ".*(video).*" -exec mv {} nonvpn/Video \;
+find nonvpn/ -maxdepth 1 -regextype posix-extended -regex ".*(audio|voip).*" -exec mv {} nonvpn/VoIP \;
 cd ../../
 ```
 
 ## ISCX-Tor
 [ISCX-Tor](https://www.unb.ca/cic/datasets/tor.html) is a dataset consists of Tor and non-Tor traffic.
 ```bash
-mkdir -p dataset/iscx/{tor,nontor}
+mkdir -p dataset/iscx/{tor,nontor}/{train_test,4bit}
 cd dataset/iscx/
 wget --spider -r -l inf -nd -np -R "index.html*" -o /dev/stdout http://cicresearch.ca/CICDataset/ISCX-Tor-NonTor-2017/Dataset/PCAPs/ | grep '^--' | awk '{print $3}' >> all_urls_tor_nontor.txt
 cat all_urls_tor_nontor.txt | grep -E '.zip|.xz' | sort | uniq >> download_urls_tor_nontor.txt
