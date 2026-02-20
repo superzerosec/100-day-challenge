@@ -92,21 +92,13 @@ find nontor/ -maxdepth 1 -regextype posix-extended -type f -iregex ".*(audio|voi
 cd ../../
 ```
 
-## CIC-IoT-2022
+## CIC-IoT-2023
 ### Download the Dataset
-[CIC-IoT-2022](https://www.unb.ca/cic/datasets/iot.html) is a dataset consists of IoT traffic.
+[CIC-IoT-2023](http://cicresearch.ca/IOTDataset/CIC_IOT_Dataset2023/) is a dataset consists of IoT traffic.
 ```bash
-mkdir -p dataset/cic-iot/{train_test,4bit}
-cd dataset/cic-iot/
-wget --spider -r -l inf -nd -np -R "index.html*" -o /dev/stdout http://cicresearch.ca/CICDataset/CIC-IoT-2022/Dataset/PCAPs/ | grep '^--' | awk '{print $3}' >> all_urls_cic_iot.txt
-cat all_urls_cic_iot.txt | grep -E '.zip|.xz' | sort | uniq >> download_urls_cic_iot.txt
-while read url; do axel -n 100 $url; done < download_urls_cic_iot.txt
-```
-
-### Extract the Dataset
-IoT Dataset.
-```bash
-
+wget --spider -r -l inf -A -nd -np -R "index.html*" -o /dev/stdout http://cicresearch.ca/IOTDataset/CIC_IOT_Dataset2023/Dataset/PCAP/ | grep '^--' | awk '{print $3}' >> all_urls.txt
+cat all_urls.txt | grep '.pcap' | sort | uniq >> pcap_urls.txt
+while read url; do axel -n 100 $url; done < pcap_urls.txt
 ```
 
 # Usage
