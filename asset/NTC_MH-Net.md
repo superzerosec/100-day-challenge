@@ -96,9 +96,9 @@ cd ../../
 ### Download the Dataset
 [CIC-IoT-2023](http://cicresearch.ca/IOTDataset/CIC_IOT_Dataset2023/) is a dataset consists of IoT traffic.
 ```bash
-wget --spider -r -l inf -A -nd -np -R "index.html*" -o /dev/stdout http://cicresearch.ca/IOTDataset/CIC_IOT_Dataset2023/Dataset/PCAP/ | grep '^--' | awk '{print $3}' >> all_urls.txt
-cat all_urls.txt | grep '.pcap' | sort | uniq >> pcap_urls.txt
-while read url; do axel -n 100 $url; done < pcap_urls.txt
+mkdir -p dataset/cic_iot_2023/
+cd dataset/cic_iot_2023/
+wget -r -np -nH --cut-dirs=4 -P ./ -R "index.html*" -A "*.pcap" "http://cicresearch.ca/IOTDataset/CIC_IOT_Dataset2023/Dataset/PCAP/"
 ```
 
 # Usage
