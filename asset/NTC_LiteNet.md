@@ -27,7 +27,28 @@ wget https://github.com/afifhaziq/GoByte/releases/latest/download/gobyte-linux-a
 chmod +x gobyte-linux-amd64
 sudo mv gobyte-linux-amd64 /usr/local/bin/gobyte
 # Process the Dataset
-gobyte --dataset dataset/Malaya_GT --format numpy --length 1500 --streaming --output malaya_gt.npy
+gobyte --dataset dataset/Malaya_GT --format numpy --streaming --length 50 --output malaya_50
+```
+### Spliting the Dataset
+Split the dataset into 80:10:10 ratio for training, testing, and validation.
+```python
+import numpy as np
+import torch
+
+dataset = np.load("output/malaya_50_data.npy", allow_pickle=True)
+dataset = torch.from_numpy(dataset.astype(np.float32))
+
+# Spliting dataset into 80:10:10 ratio
+total_len = len(dataset)
+train_end = int(total_len * 0.8)
+val_end = train_end + int(total_len * 0.1)
+
+train = dataset[:train_end, :]
+val = dataset[train_end:val_end, :]
+test = dataset[val_end:, :]
+total_len = len(train) + len(test) + len(val)
+
+print(train.shape, test.shape, val.shape, total_len)
 ```
 # Usage
 ## Train the Model
