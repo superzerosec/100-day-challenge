@@ -29,7 +29,7 @@ sudo mv gobyte-linux-amd64 /usr/local/bin/gobyte
 # Process the Dataset
 gobyte --dataset dataset/Malaya_GT --format numpy --streaming --length 50 --output malaya_50
 ```
-### Spliting the Dataset
+### Splitting the Dataset
 Split the dataset into 80:10:10 ratio for training, testing, and validation.
 ```python
 import numpy as np
@@ -38,7 +38,7 @@ import torch
 dataset = np.load("output/malaya_50_data.npy", allow_pickle=True)
 dataset = torch.from_numpy(dataset.astype(np.float32))
 
-# Spliting dataset into 80:10:10 ratio
+# Splitting the dataset into 80:10:10 ratio
 total_len = len(dataset)
 train_end = int(total_len * 0.8)
 val_end = train_end + int(total_len * 0.1)
