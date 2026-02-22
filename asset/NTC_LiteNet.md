@@ -20,36 +20,76 @@ uvx hf download Afifhaziq/MalayaNetwork_GT \
     --include "PCAP/*"
 mv dataset/PCAP/ dataset/Malaya_GT
 ```
-### Preprocess
+## Preprocess
+Download GoByte and process the dataset using GoByte.
 ```bash
 # Download GoByte
 wget https://github.com/afifhaziq/GoByte/releases/latest/download/gobyte-linux-amd64
 chmod +x gobyte-linux-amd64
 sudo mv gobyte-linux-amd64 /usr/local/bin/gobyte
-# Process the Dataset
-gobyte --dataset dataset/Malaya_GT --format numpy --streaming --length 50 --output malaya_50
 ```
-### Splitting the Dataset
-Split the dataset into 80:10:10 ratio for training, testing, and validation.
+Process the dataset.
+```bash
+gobyte --dataset dataset/Malaya_GT --format csv --streaming --length 50 --output malaya_50.csv
+```
+### Importing Libraries and Loading the Dataset
 ```python
 import numpy as np
 import torch
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from torch.utils.data import Subset, DataLoader, Dataset
 
-dataset = np.load("output/malaya_50_data.npy", allow_pickle=True)
-dataset = torch.from_numpy(dataset.astype(np.float32))
-
-# Splitting the dataset into 80:10:10 ratio
-total_len = len(dataset)
-train_end = int(total_len * 0.8)
-val_end = train_end + int(total_len * 0.1)
-
-train = dataset[:train_end, :]
-val = dataset[train_end:val_end, :]
-test = dataset[val_end:, :]
-total_len = len(train) + len(test) + len(val)
-
-print(train.shape, test.shape, val.shape, total_len)
+dataset = pd.read_csv("output/malaya_50.csv")
 ```
+### Randomising Stratified Sampling
+```python
+indices = np.arange(len(dataset))
+labels = dataset["Class"] # Use the "Class" column from the dataframe for stratification
+
+train_indices, test_indices = train_test_split(
+    indices, 
+    test_size=0.2, 
+    stratify=labels, 
+    random_state=42
+)
+```
+### Splitting
+Split the dataset into 80:20 ratio for training and testing.
+```python
+class DataFrameDataset(Dataset):
+    """Dataset that indexes DataFrame by row and returns tensors for DataLoader collate."""
+    def __init__(self, df, feature_cols=None, label_col="Class"):
+        self.df = df
+        self.label_col = label_col
+        self.feature_cols = feature_cols or [c for c in df.columns if c != label_col]
+        self.classes = sorted(df[label_col].unique().tolist())
+        self.class_to_idx = {c: i for i, c in enumerate(self.classes)}
+
+    def __len__(self):
+        return len(self.df)
+
+    def __getitem__(self, idx):
+        row = self.df.iloc[idx]
+        x = torch.tensor(row[self.feature_cols].values.astype(np.float32))
+        y = self.class_to_idx[row[self.label_col]]
+        return {"x": x, "y": y}
+
+
+# Convert the numpy array of indices to a plain list of ints
+train_indices = train_indices.astype(int).tolist()
+test_indices = test_indices.astype(int).tolist()
+
+# Wrap DataFrame in a Dataset (returns tensors), then apply Subset
+base_dataset = DataFrameDataset(dataset)
+train_dataset = Subset(base_dataset, train_indices)
+test_dataset = Subset(base_dataset, test_indices)
+
+# Loaders now batch correctly (default_collate stacks the dict of tensors)
+train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True)
+test_loader = DataLoader(test_dataset, batch_size=32, shuffle=False)
+```
+
 # Usage
 ## Train the Model
 ```bash
