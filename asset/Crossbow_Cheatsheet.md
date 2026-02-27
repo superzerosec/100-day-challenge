@@ -16,6 +16,7 @@ Set API key.
 export OPENAI_API_KEY=your-key-here
 # or ANTHROPIC_API_KEY or GEMINI_API_KEY
 ```
+# Usage
 Start Crossbow:
 ```bash
 crossbow
