@@ -1,4 +1,4 @@
-# Crossbow Chearsheet
+# Crossbow Cheatsheet
 World's first fully autonomous AI security engineer that finds and exploits vulnerabilities, performs SOC operations, forensics, and threat intelligence.
 
 ## Installation
