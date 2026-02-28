@@ -32,3 +32,12 @@ LiteNet offers a comprehensive, end-to-end workflow for training, optimizing, an
 
 ## Compression Techniques
 <img src="./image/image10.png" width="80%" />
+
+# MATEC
+MATEC introduces a lightweight neural network that specifically focuses on time and space complexity to improve online performance and efficiency for encrypted traffic classification. The core innovation of MATEC lies in its use of three consecutive packets randomly chosen from within a traffic flow as its input, capturing critical contextual information. Feature representations at both the global (flow) and local (packet) levels are maximized for reuse through a streamlined, "thin" module design. Central to this architecture is the integration of multi-head attention mechanisms alongside 1D convolutional networks (1D-CNN), enabling MATEC to effectively model relationships within and between packets for highly efficient and accurate online encrypted traffic classification.
+
+## Embedding and Attention Encoder Module
+<img src="./image/image11.png" width="80%" />
+
+## Multi-head Attention Module
+<img src="./image/image12.png" width="80%" />
