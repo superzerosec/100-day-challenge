@@ -41,3 +41,19 @@ MATEC introduces a lightweight neural network that specifically focuses on time 
 
 ## Multi-head Attention Module
 <img src="./image/image12.png" width="80%" />
+
+# TMC-GCN
+
+Traffic Mapping Classification-Graph Convolutional Networks model (TMC-GCN) is introduced to address encrypted traffic classification. The model is built upon a network traffic topology known as the Flow Mapping Graph (FMG), which leverages Graph Convolutional Networks (GCN). In FMG, sequential edges are created between vertices according to the arrival order of packets, while jump-order edges connect packets from different bursts that share the same direction. This design not only captures the temporal characteristics of the packets but also enhances the representation of relationships between client and server packets. Utilizing FMG, TMC-GCN is able to automatically capture and learn the features and structural information of key vertices. By transforming the encrypted stream classification problem into a graph classification task, TMC-GCN enables effective classification of encrypted traffic originating from various data sources and application scenarios.
+
+## GCN
+
+<img src="./image/image13.png" width="80%" />
+
+## Packet-Level Client-Server Interaction for a Stream
+
+<img src="./image/image14.png" width="80%" />
+
+## FMG Construction Process for Encrypted Traffic
+
+<img src="./image/image15.png" width="80%" />
