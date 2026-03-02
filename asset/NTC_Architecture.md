@@ -1,4 +1,8 @@
-# Network Traffic Classification Architecture
+# Network Traffic Classification (NTC) Architecture
+
+Network Traffic Classification (NTC) is the process of identifying and categorizing network traffic flows or packets based on their characteristics, such as protocol, application type, or behavior, often using machine learning or deep learning approaches. NTC serves as a critical component in network management, security monitoring, quality of service enforcement, and anomaly detection. Accurate classification enables network administrators to detect malicious activities, optimize resource allocation, and ensure compliance with organizational policies—even in modern, encrypted, and high-speed network environments.
+
+The following sections provide more detail on each representative approach, including architecture diagrams and references to relevant publications, illustrating the evolution of network traffic classification toward more accurate, robust, and practical solutions.
 
 # ET-BERT
 
