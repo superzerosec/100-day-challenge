@@ -85,6 +85,6 @@ DOI: [10.1038/s41598-025-94240-6](https://doi.org/10.1038/s41598-025-94240-6)
 
 The autoencoder (AE) and deep graph convolutional networks (ADGCN) introduces a method for traffic classification on few-shot datasets. Researchers first employ an AE to reconstruct the traffic, allowing shorter traffic samples to learn abstract feature representations from longer traffic instances of the same class, effectively replacing zeros and mitigating the negative impact of zero-padding. The reconstructed traffic is subsequently classified using GCNII, a deep GCN architecture designed to address the challenge of limited data samples. As an end-to-end traffic classification approach suitable for various scenarios, ADGCN demonstrates, according to experimental results, a classification accuracy improvement of 3.5% to 24% compared to existing state-of-the-art methods.
 
-## AE + GCN
+## AE + Deep GCN
 
 <img src="./image/image16.png" width="80%" />
