@@ -1,6 +1,6 @@
 # Network Traffic Classification (NTC) Architecture
 
-Network Traffic Classification (NTC) is the process of identifying and categorising network traffic flows or packets based on their characteristics, such as protocol, application type, or behaviour, often using machine learning or deep learning approaches. NTC serves as a critical component in network management, security monitoring, quality of service enforcement, and anomaly detection. Accurate classification enables network administrators to detect malicious activities, optimize resource allocation, and ensure compliance with organisational policies—even in modern, encrypted, and high-speed network environments.
+Network Traffic Classification (NTC) is the process of identifying and categorising network traffic flows or packets based on their characteristics, such as protocol, application type, or behaviour, often using machine learning or deep learning approaches. NTC serves as a critical component in network management, security monitoring, quality of service enforcement, and anomaly detection. Accurate classification enables network administrators to detect malicious activities, optimise resource allocation, and ensure compliance with organisational policies—even in modern, encrypted, and high-speed network environments.
 
 The following sections provide more detail on each representative approach, including architecture diagrams and references to relevant publications, illustrating the evolution of network traffic classification towards more accurate, robust, and practical solutions.
 
@@ -17,7 +17,7 @@ ET-BERT is a method for learning datagram contextual relationships from encrypte
 
 # Trident
 
-By: Ziming Zhao, Zhaoxuan Li, Zhuoxue Song, Wenhao Li, Fan Zhang  
+By: Ziming Zhao, Zhaoxuan Li, Zhuoxue Song, Wenhao Li & Fan Zhang  
 Year: 2024  
 DOI: [10.1145/3589334.3645407](https://doi.org/10.1145/3589334.3645407)
 
@@ -92,3 +92,23 @@ The autoencoder (AE) and deep graph convolutional networks (ADGCN) introduces a 
 ## AE + Deep GCN
 
 <img src="./image/image16.png" width="80%" />
+
+# A Graph Representation Framework for NTC
+
+By: Zulu Okonkwo, Ernest Foo, Zhe Hou, Qinyi Li & Zahra Jadidia  
+Year: 2025  
+DOI: [10.1016/j.cose.2024.104134](https://doi.org/10.1016/j.cose.2024.104134)
+
+Researchers focus on feature extraction and representation in NTC by leveraging the expressive power of graphs to depict network traffic at various granularity levels. By modeling network traffic as interconnected graphs, both flow-level and packet-level data can be analyzed. The graph representation method for encrypted NTC employed by researchers effectively preserves crucial information despite encryption and obfuscation. Robustness is further enhanced by utilizing cosine similarity to exploit correlations between encrypted network flows and packets, thereby defining relationships between abstract entities. This graph structure facilitates the creation of structural embeddings that accurately characterize network traffic across different encryption levels. The end-to-end process developed by researchers demonstrates significant improvements in areas where traditional NTC methods face challenges, such as in Tor classification, which utilizes anonymization to further obfuscate traffic.
+
+## Model Overview
+
+Graph generation starts with processing the PCAP samples then graphs are created based on the specified task. After splitting PCAP samples into flows, individual packets of flows are analysed. For flow classification, the edge creation process comes next. For packet-level classification, the byte stream of individual packets is analysed before edge creation. Padding is applied at the byte-level to ensure uniformity of data. Truncation is applied at the packet-level to ensure graphs are not dense. The graph data is labelled, processed and stored in memory.
+
+<img src="./image/image17.png" width="80%" />
+
+## Graph Structure
+
+Graph structures represent unique flow-level graphs for four application classes of the IEEE-im dataset.
+
+<img src="./image/image18.png" width="80%" />
