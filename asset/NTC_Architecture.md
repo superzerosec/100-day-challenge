@@ -9,6 +9,7 @@ The following sections provide more detail on each representative approach, incl
 By: Xinjie Lin, Gang Xiong, Gaopeng Gou, Zhen Li, Junzheng Shi & Jing Yu  
 Year: 2022  
 DOI: [10.1145/3485447.3512217](https://doi.org/10.1145/3485447.3512217)  
+Code: [ET-BERT](https://github.com/linwhitehat/ET-BERT) 
 
 ET-BERT is a method for learning datagram contextual relationships from encrypted traffic, which could be directly applied to different encrypted traffic scenarios and accurately identify classes of traffic. First, ET-BERT employs multi-layer attention in large scale unlabelled traffic to learn both inter-datagram contextual and inter-traffic transport relationships. Second, ET-BERT could be applied to a specific scenario to identify traffic types by fine-tuning the labeled encrypted traffic on a small scale.
 
@@ -36,7 +37,8 @@ Trident addresses two primary challenges in network traffic classification: (i) 
 
 By: Haozhen Zhang, Haodong Yue, Xi Xiao, Le Yu, Qing Li, Zhen Ling & Ye Zhang  
 Year: 2023  
-DOI: [10.48550/arXiv.2501.03279](https://doi.org/10.48550/arXiv.2501.03279)
+DOI: [10.48550/arXiv.2501.03279](https://doi.org/10.48550/arXiv.2501.03279)  
+Code: [MH-Net](https://github.com/ViktorAxelsen/MH-Net) 
 
 MH-Net addresses the shortcomings of traditional byte-level analysis by introducing a novel classification approach that utilizes multi-view heterogeneous traffic graphs to represent detailed relationships among traffic bytes. MH-Net creates multiple types of traffic units by aggregating different numbers of bits, resulting in multi-view traffic graphs with varying levels of information granularity. By modeling various byte correlations—such as those between header and payload—MH-Net introduces heterogeneity to the traffic graph, which substantially boosts model performance. Additionally, it employs multi-task contrastive learning to reinforce the robustness of traffic unit representations. Experiments on the ISCX and CIC-IoT datasets, considering both packet-level and flow-level classification, demonstrate that MH-Net consistently outperforms numerous state-of-the-art methods.
 
@@ -44,6 +46,9 @@ MH-Net addresses the shortcomings of traditional byte-level analysis by introduc
 <img src="./image/image08.png" width="80%" />
 
 # LiteNet
+
+Code: [LiteNet](https://github.com/afifhaziq/LiteNet) 
+
 LiteNet offers a comprehensive, end-to-end workflow for training, optimizing, and deploying neural network models for Network Traffic Classification (NTC). Its pipeline incorporates SHAP-based feature selection, semi-structured sparse pruning, quantization to FP16 or INT8, and conversion into a TensorRT engine to enable high-performance inference.
 
 ## CNN
@@ -53,6 +58,12 @@ LiteNet offers a comprehensive, end-to-end workflow for training, optimizing, an
 <img src="./image/image10.png" width="80%" />
 
 # MATEC
+
+By: Jin Cheng, Yulei Wu, Yuepeng E, Junling You, Tong Li, Hui Li & Jingguo Ge  
+Year: 2021  
+DOI: [10.1016/j.comnet.2021.108472](https://doi.org/10.1016/j.comnet.2021.108472)  
+Code: [MATEC](https://github.com/JieJayCao/Encrypted-Traffic-Classification-Models/blob/main/models/MATEC.py) 
+
 MATEC introduces a lightweight neural network that specifically focuses on time and space complexity to improve online performance and efficiency for encrypted traffic classification. The core innovation of MATEC lies in its use of three consecutive packets randomly chosen from within a traffic flow as its input, capturing critical contextual information. Feature representations at both the global (flow) and local (packet) levels are maximized for reuse through a streamlined, "thin" module design. Central to this architecture is the integration of multi-head attention mechanisms alongside 1D convolutional networks (1D-CNN), enabling MATEC to effectively model relationships within and between packets for highly efficient and accurate online encrypted traffic classification.
 
 ## Embedding and Attention Encoder Module
@@ -86,6 +97,7 @@ Traffic Mapping Classification-Graph Convolutional Networks model (TMC-GCN) is i
 By: Shengwei Xu, Jijie Han, Yilong Liu, Haoran Liu & Yijie Bai  
 Year: 2025  
 DOI: [10.1038/s41598-025-94240-6](https://doi.org/10.1038/s41598-025-94240-6)  
+Code: [ADGCN](hhttps://github.com/han20011019/ADGCN) 
 
 The autoencoder (AE) and deep graph convolutional networks (ADGCN) introduces a method for traffic classification on few-shot datasets. Researchers first employ an AE to reconstruct the traffic, allowing shorter traffic samples to learn abstract feature representations from longer traffic instances of the same class, effectively replacing zeros and mitigating the negative impact of zero-padding. The reconstructed traffic is subsequently classified using GCNII, a deep GCN architecture designed to address the challenge of limited data samples. As an end-to-end traffic classification approach suitable for various scenarios, ADGCN demonstrates, according to experimental results, a classification accuracy improvement of 3.5% to 24% compared to existing state-of-the-art methods.
 
