@@ -127,8 +127,8 @@ Graph structures represent unique flow-level graphs for four application classes
 
 # CGNN
 
-By: Bo Pang, Yongquan Fu, Siyuan Ren, Ye Wang, Qing Liao & Yan Jia 
-Year: 2021
+By: Bo Pang, Yongquan Fu, Siyuan Ren, Ye Wang, Qing Liao & Yan Jia  
+Year: 2021  
 DOI: [10.48550/arXiv.2110.09726](https://doi.org/10.48550/arXiv.2110.09726)
 
 CGNN is a graph neural network-based traffic classification method proposed by researchers, which builds a graph classifier using automatically extracted features from a chained graph model on the packet stream to preserve the compositional sequence.
@@ -159,8 +159,8 @@ CGNN is a graph neural network-based traffic classification method proposed by r
 
 # ESA-GCN
 
-By: Liying Zhang & Haihang Sun 
-Year: 2024
+By: Liying Zhang & Haihang Sun  
+Year: 2024  
 DOI: [10.3390/app14010111](https://doi.org/10.3390/app14010111)
 
 The advantages of this model are as follows: (i) it employs the ENN-SMOTE comprehensive sampling method to balance the dataset by reducing majority class nodes and increasing minority class nodes; (ii) the ENN algorithm reduces the classifier’s error rate and improves performance stability by removing low-quality and noisy data; (iii) an attention mechanism is introduced during the edge generation phase between new nodes and original nodes, fully considering the mutual relationships between nodes and concentrating on a subset of key information with high weights, thereby significantly improving classification accuracy while reducing model parameters and computational complexity
