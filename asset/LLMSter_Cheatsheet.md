@@ -35,6 +35,11 @@ Load the model:
 lms load openai/gpt-oss-20b
 ```
 
+Unload the model:
+```bash
+lms unload openai/gpt-oss-20b
+```
+
 Start the server:
 
 ```bash
@@ -45,6 +50,21 @@ Verify the API is responding:
 
 ```bash
 curl http://localhost:1234/v1/models
+```
+
+```bash
+curl -s http://127.0.0.1:1234/v1/chat/completions \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer dev" \
+  -d '{
+    "model": "openai/gpt-oss-20b",
+    "messages": [                                             
+      {"role": "system", "content": "You are a helpful assistant."},
+      {"role": "user", "content": "Which one is bigger, 9.11 or 9.9? think carefully."}
+    ],
+    "temperature": 0.7,
+    "max_tokens": 256
+  }' | jq -r '.choices[].message.content'
 ```
 
 Stop the server when done testing:
