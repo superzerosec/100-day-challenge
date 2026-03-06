@@ -35,9 +35,10 @@ Load the model:
 lms load openai/gpt-oss-20b
 ```
 
-Unload the model:
+Chat with the model:
+
 ```bash
-lms unload openai/gpt-oss-20b
+lms chat
 ```
 
 Start the server:
@@ -71,6 +72,12 @@ Stop the server when done testing:
 
 ```bash
 lms server stop
+```
+
+Unload the model:
+
+```bash
+lms unload openai/gpt-oss-20b
 ```
 
 ## Create Systemd Service
