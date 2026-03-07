@@ -80,6 +80,12 @@ Unload the model:
 lms unload openai/gpt-oss-20b
 ```
 
+Stop daemon:
+
+```bash
+lms daemon down
+```
+
 ## Create Systemd Service
 
 Create `/etc/systemd/system/lmstudio.service`. Replace `YOUR_USERNAME` with your username.
