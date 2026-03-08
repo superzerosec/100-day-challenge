@@ -65,7 +65,7 @@ Open Cursor Chat, enter a prompt, and submit it. Cursor will route requests thro
 
 # References
 
-- [LLMSter](https://lmstudio.ai/docs/developer/core/llmster)
-- [Ngrok](https://ngrok.com/)
-- [Cursor](https://www.cursor.com/)
-- [Use Cursor with Local LLM and LM Studio](https://dev.to/0xkoji/use-cursor-with-local-llm-and-lm-studio-i54)
+[LLMSter](https://lmstudio.ai/docs/developer/core/headless_llmster)  
+[Ngrok](https://ngrok.com/)  
+[Cursor](https://www.cursor.com/)  
+[Use Cursor with Local LLM and LM Studio](https://dev.to/0xkoji/use-cursor-with-local-llm-and-lm-studio-i54)  

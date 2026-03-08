@@ -1,7 +1,7 @@
 # llmster Cheatsheet
 `llmster`, LM Studio's headless daemon, can be configured to run on startup. This guide covers setting up `llmster` to launch, load a model, and start an HTTP server automatically using `systemctl` on Linux.
 
-## Install the Daemon
+## Installation
 
 Run the following command to install `llmster`:
 
@@ -14,6 +14,10 @@ Verify the installation:
 ```bash
 lms --help
 ```
+
+# Usage
+
+This section provides a quick overview of common `llmster` (LM Studio Headless) commands. It demonstrates how to install LLMSter, check the installation, and use essential commands to download, load, chat with, and serve models via HTTP. These steps help you get started running large language models locally and verify your setup before automating startup with `systemctl`.
 
 ## Download a Model
 
@@ -145,8 +149,6 @@ sudo systemctl restart lmstudio
 sudo systemctl disable lmstudio
 ```
 
-## Community
+# References
 
-Chat with other LM Studio developers, discuss LLMs, hardware, and more on the [LM Studio Discord server](https://discord.gg/aPQfnNkxGC).
-
-Please report bugs and issues in the [lmstudio-bug-tracker](https://github.com/lmstudio-ai/lmstudio-bug-tracker/issues) GitHub repository.
+[LLMSter](https://lmstudio.ai/docs/developer/core/headless_llmster)
