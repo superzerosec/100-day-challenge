@@ -46,7 +46,7 @@ LM Studio will now display your local model (e.g., `openai/gpt-oss-20b`) as an a
 
 # Step 3: Usage
 
-LLMSter and LM Studio can run on the same machine, other machines on local or remote network using LM Link.
+LLMSter and LM Studio can run on the same machine or other machines on local or remote network using LM Link.
 
 <img src="./image/image30.png" width="50%" />
 
