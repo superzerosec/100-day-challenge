@@ -12,6 +12,14 @@ Install OpenCode with the following command.
 ```bash
 curl -fsSL https://opencode.ai/install | bash
 ```
+
+### Homebrew (macOS)
+For macOS users, you can install Opencode using Homebrew.
+
+```bash
+brew install opencode
+```
+
 To enable OpenCode to "make call inference provider" with Hugging Face, you need to set the appropriate permissions on your Hugging Face account or organization. This is typically done by generating an **Access Token** with "Read" or "Inference" permissions.
 
 Follow these steps:
