@@ -168,3 +168,27 @@ The advantages of this model are as follows: (i) it employs the ENN-SMOTE compre
 ## GCN
 
 <img src="./image/image25.png" width="80%" />
+
+# Detachable Convolutional GCN-LSTM
+
+By: Xiaogang Yuan, Jianxin Wan, Dezhi An & Huan Pei  
+Year: 2025  
+DOI: [10.1038/s41598-025-13397-2](https://doi.org/10.1038/s41598-025-13397-2)
+
+The Detachable Convolutional GCN-LSTM (DC-GL) model is designed to classify traffic by representing data as graphs that combine protocol-layer and traffic statistical features extracted from encrypted flows. Within this framework, a Graph Convolutional Network (GCN) captures the structural relationships between nodes, while a Long Short-Term Memory (LSTM) network learns the temporal patterns of network behavior. To boost both computational efficiency and feature extraction, the model enhances the GCN layers with detachable convolution. Furthermore, an attention mechanism is added to focus on and improve the representation of the most important features.
+
+## Proposed DC-GL Model Overview
+
+<img src="./image/image35.png" width="80%" />
+
+## Overall Architecture
+
+<img src="./image/image32.png" width="80%" />
+
+## Attention Mechanism
+
+<img src="./image/image33.png" width="80%" />
+
+## Detachable Convolutional Graph Layer Structure
+
+<img src="./image/image34.png" width="80%" />
