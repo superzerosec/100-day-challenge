@@ -192,3 +192,19 @@ The Detachable Convolutional GCN-LSTM (DC-GL) model is designed to classify traf
 ## Detachable Convolutional Graph Layer Structure
 
 <img src="./image/image34.png" width="80%" />
+
+# EC-GCN
+
+By: Zulong Diao, Gaogang Xie, Xin Wang, Rui Ren, Xuying Meng, Guangxing Zhang, Kun Xie & Mingyu Qiao  
+Year: 2023  
+DOI: [10.1016/j.comnet.2023.109614](https://doi.org/10.1016/j.comnet.2023.109614)
+
+EC-GCN is a novel deep learning framework developed to classify encrypted traffic flows using multi-scale graph convolutional neural networks. The method begins with a lightweight layer that utilizes only metadata, encoding each encrypted traffic flow as a graph representation and making the framework independent of specific encryption protocols. A new graph pooling and structure learning layer is introduced to dynamically extract multiple graph representations, enhancing adaptability to complex network environments. As an end-to-end classification model, EC-GCN captures spatial–temporal features from traffic time series and performs classification within a unified architecture. Experimental results on three real-world datasets show that EC-GCN achieves 5%–20% higher accuracy and surpasses state-of-the-art methods.
+
+## The Encoding Process In Which We Transform The Sequence Data Into A Graph Representation.
+
+<img src="./image/image36.png" width="80%" />
+
+## EC-GCN Framework Combined
+
+<img src="./image/image37.png" width="80%" />
